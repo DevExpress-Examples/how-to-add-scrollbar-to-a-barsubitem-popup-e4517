@@ -1,0 +1,41 @@
+﻿<Window x:Class="DXSample.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"
+        xmlns:dxbt="http://schemas.devexpress.com/winfx/2008/xaml/bars/themekeys"
+        xmlns:local="clr-namespace:DXSample"
+        Title="MainWindow" Height="350" Width="525">
+    <Grid>
+        <dxb:BarManager>
+            <dxb:BarManager.Resources>
+                <ControlTemplate x:Key="{dxbt:SubMenuBarControlThemeKey ResourceKey=ControlTemplate, IsThemeIndependent=True}" TargetType="{x:Type dxb:SubMenuBarControl}">
+                    <Grid MaxHeight="400">
+                        <ContentControl SnapsToDevicePixels="True" x:Name="PART_ContentSide" Template="{DynamicResource {dxbt:SubMenuBarControlThemeKey ResourceKey=ContentSideBorderTemplate}}" Visibility="{TemplateBinding ContentSideVisibility}"  IsTabStop="False"/>
+                        <ScrollViewer>
+                            <Grid>
+                                <dxb:GlyphSidePanel SnapsToDevicePixels="True" x:Name="PART_GlyphSide" HorizontalAlignment="Stretch" Visibility="{TemplateBinding GlyphSideVisibility}"/>
+                                <ItemsPresenter x:Name="PART_ItemsPresenter" />
+                            </Grid>
+                        </ScrollViewer>
+                    </Grid>
+                </ControlTemplate>
+            </dxb:BarManager.Resources>
+            <dxb:BarManager.Items>
+                <dxb:BarSubItem x:Name="bSub" Content="Click" ItemLinksSource="{local:StringsSource 200}">
+                    <dxb:BarSubItem.ItemTemplate>
+                        <DataTemplate>
+                            <ContentControl>
+                                <dxb:BarButtonItem Content="{Binding}"/>
+                            </ContentControl>
+                        </DataTemplate>
+                    </dxb:BarSubItem.ItemTemplate>
+                </dxb:BarSubItem>
+            </dxb:BarManager.Items>
+            <dxb:BarManager.Bars>
+                <dxb:Bar>
+                    <dxb:BarSubItemLink BarItemName="bSub"/>
+                </dxb:Bar>
+            </dxb:BarManager.Bars>
+        </dxb:BarManager>
+    </Grid>
+</Window>
